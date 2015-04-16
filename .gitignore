@@ -1,1 +1,5 @@
-_*
+/_*/
+/pouch_*/
+/node_modules/
+config.json
+log.txt
