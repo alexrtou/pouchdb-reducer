@@ -1,12 +1,12 @@
 var PouchDB = require('pouchdb');
-var ld = require('leveldown-prebuilt');
+//var ld = require('leveldown-prebuilt');
 
 console.log('pwd : ', process.cwd());
 
 var spawn = require('child_process').spawn;
 
 var serve = spawn(
-  'node', ['node_modules/pouchdb-server/bin/pouchdb-server', '-p', '5984', '--level-backend', '"leveldown-prebuilt"'], {
+  'node', ['node_modules/pouchdb-server/bin/pouchdb-server', '-p', '5984'], {
     cwd: process.cwd()
   });
 
@@ -31,18 +31,14 @@ serve.on('close', function (code) {
 // Traitements et tests
 var pouchTests = function () {
 
-  var db = new PouchDB('http://localhost:5984/alex_db', {
-    db: ld
-  });
+  var db = new PouchDB('http://localhost:5984/alex_db');
 
   db.destroy().then(function () {
     console.log('la base alex_db est détruite');
   }).catch(function (error) {
     console.log('delete db ', error);
   }).then(function () {
-    return new PouchDB('http://localhost:5984/alex_db', {
-      db: ld
-    });
+    return new PouchDB('http://localhost:5984/alex_db');
   }).then(function (db) {
 
     db.bulkDocs([

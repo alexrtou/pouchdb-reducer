@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "leveldown-prebuilt": "^1.0.3",
     "lodash": "^3.7.0",
     "pouchdb": "^3.4.0",
     "pouchdb-server": "^0.6.5"
