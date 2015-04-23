@@ -1,5 +1,7 @@
 var PouchDB = require('pouchdb');
 var ld = require('leveldown-prebuilt');
+PouchDB.plugin(require('pouchdb-authentication'));
+//PouchDB.debug.enable('*');
 
 console.log('pwd : ', process.cwd());
 
@@ -44,7 +46,17 @@ var pouchTests = function () {
       db: ld
     });
   }).then(function (db) {
-
+    db.signup('batman', 'brucewayne', function (err, response) {
+      if (err) {
+        if (err.name === 'conflict') {
+          console.log('"batman" already exists, choose another username');
+        } else if (err.name === 'forbidden') {
+          console.log('invalid username');
+        } else {
+          console.log('HTTP error, cosmic rays, etc.', err);
+        }
+      }
+    });
     db.bulkDocs([
         {
           _id: 'manager',

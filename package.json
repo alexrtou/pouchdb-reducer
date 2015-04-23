@@ -12,6 +12,7 @@
     "leveldown-prebuilt": "^1.0.3",
     "lodash": "^3.7.0",
     "pouchdb": "^3.4.0",
+    "pouchdb-authentication": "^0.3.6",
     "pouchdb-server": "^0.6.5"
   }
 }

@@ -34,6 +34,7 @@ db_old
   var db = new MyPouch('alex_db');
   db.sayHello();
 
+
   var allTestDuGroupe = function () {
     // Tous les tests du groupe 'group'
     db
