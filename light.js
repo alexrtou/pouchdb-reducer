@@ -1,8 +1,21 @@
 var PouchDB = require('pouchdb');
 var MyPouch = PouchDB.defaults({
   db: require('leveldown-prebuilt'),
-  prefix: 'datas/'
+  prefix: 'datas/',
+  auto_compaction:true
 });
+
+PouchDB.plugin({
+  sayHello: function () {
+    this.info().then(function (result) {
+      console.log('info from : ', result);
+    }).catch(function (err) {
+      console.log('erreur hello', err);
+    });
+  }
+});
+
+PouchDB.debug.enable('*');
 
 var db_old = new MyPouch('alex_db');
 
@@ -19,7 +32,7 @@ db_old
   console.log('la base alex_db est détruite');
 
   var db = new MyPouch('alex_db');
-
+  db.sayHello();
 
   var allTestDuGroupe = function () {
     // Tous les tests du groupe 'group'
@@ -249,8 +262,8 @@ db_old
       //listeUtilisateursByAppIdx();
 
       db.allDocs({
-        startkey:'test',
-        include_docs: true
+        startkey: 'test',
+        include_docs: false
       }).then(function (result) {
         console.log('-------------------------------------------------------');
         console.log('requête persistente');
