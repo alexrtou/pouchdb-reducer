@@ -11,7 +11,9 @@ db_old
 
 .then(function () {
   console.log('la base alex_db est détruite');
-  var db = new PouchDB('alex_db');
+  var db = new PouchDB('alex_db', {
+    db: require('sqldown')
+  });
   return db;
 })
 

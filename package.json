@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^3.7.0",
-    "pouchdb": "^3.4.0",
-    "pouchdb-server": "^0.6.5"
+    "pouchdb": "^3.6.0",
+    "pouchdb-server": "^0.6.6",
+    "sqldown": "^2.0.0"
   }
 }
