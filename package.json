@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsondown": "^0.1.1",
     "lodash": "^3.7.0",
+    "memdown": "^1.0.0",
     "pouchdb": "^3.6.0",
-    "pouchdb-server": "^0.6.6",
-    "sqldown": "^2.0.0"
+    "pouchdb-server": "^0.6.6"
   }
 }
