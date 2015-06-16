@@ -9,10 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^2.9.30",
     "jsondown": "^0.1.1",
     "lodash": "^3.7.0",
-    "memdown": "^1.0.0",
-    "pouchdb": "^3.6.0",
-    "pouchdb-server": "^0.6.6"
+    "pouchdb": "^3.6.0"
   }
 }
