@@ -21,95 +21,46 @@ db_old
 })
 
 .then(function () {
-
-  return fsAsync.readFileAsync('./picture.jpg');
-
-})
-
-.then(function (data) {
   db = new PouchDB('./datas/alex_db', {
     db: ldown
   });
 
-  //console.log("datas : ", data);
+  var docs = [];
+  for (var i = 0; i < 100; ++i) {
+    docs.push(db.put({
+      "_id": "" + i,
+      "date": Date.now(),
+      "idx": i,
+      "from": "Alexandre"
+    }));
+  }
 
-  var doc1 = {
-    "_id": "docb",
-    "date": Date.now(),
-    "from": "Alexandre",
-    "_attachments": {
-      "picture2.jpg": {
-        "content_type": "image/jpeg",
-        "data": data
-      }
-    }
-  };
-
-  return db.put(doc1);
+  return Promise.all(docs);
 
 })
 
 .then(function () {
-  return db.get('docb');
 
-})
-
-.then(function (result) {
-  console.log(result);
-})
-
-.then(function () {
-
-  return fsAsync.readFileAsync('./picture.jpg');
-
-})
-
-.then(function (data) {
-  var doc2 = {
-    "_id": "doca",
-    "date": Date.now(),
-    "from": "Alexandre",
-    "_attachments": {
-      "picture1.jpg": {
-        "content_type": "image/jpeg",
-        "data": data
-      }
-    }
-  };
-
-  return db.put(doc2);
-
-})
-
-.then(function () {
-  return db.get('doca');
-
-})
-
-.then(function (result) {
-  console.log(result);
-})
-
-.then(function () {
-  /*return db.allDocs({
-    descending: true
-  });*/
+  var nb_elem_par_page = 10;
+  var page = 1;
 
   return db.query(
     function (doc, emit) {
-      emit([doc.date, doc._id]);
+      emit(doc.date);
     }, {
       descending: true,
-      include_docs: true
+      limit: nb_elem_par_page,
+      skip: (page - 1) * nb_elem_par_page
     });
 })
 
 .then(function (all) {
-    console.log(all);
-  })
-  .catch(function (err) {
-    console.log(err);
-  })
+  console.log(all);
+})
+
+.catch(function (err) {
+  console.log(err);
+})
 
 .then(function () {
   console.log("terminé");
