@@ -1,13 +1,10 @@
 var PouchDB = require('pouchdb');
-var ldown = require('sqldown');
 var fs = require('fs');
 var Promise = require("bluebird");
 var fsAsync = Promise.promisifyAll(fs);
 var db;
 
-var db_old = new PouchDB('./datas/alex_db', {
-  db: ldown
-});
+var db_old = new PouchDB('./datas/alex_db');
 
 db_old
   .destroy()
@@ -27,9 +24,7 @@ db_old
 })
 
 .then(function (data) {
-  db = new PouchDB('./datas/alex_db', {
-    db: ldown
-  });
+  db = new PouchDB('./datas/alex_db');
 
   //console.log("datas : ", data);
 
@@ -113,5 +108,4 @@ db_old
 
 .then(function () {
   console.log("terminé");
-  process.abort();
 });
